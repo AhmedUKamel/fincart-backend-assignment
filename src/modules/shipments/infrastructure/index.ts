@@ -1,1 +1,1 @@
-export * from './persistence/repositories/shipment.repository';
+export * from './persistence';

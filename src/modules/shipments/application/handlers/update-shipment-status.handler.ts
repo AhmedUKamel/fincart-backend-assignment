@@ -15,7 +15,7 @@ interface UpdateShipmentStatusUow {
 export class UpdateShipmentStatusHandler implements IEventHandler<EventDto> {
   private readonly logger = new Logger(UpdateShipmentStatusHandler.name);
   private readonly validationSchema = Joi.object<UpdateShipmentStatusUow>({
-    shipmentId: Joi.string().uuid({ version: 'uuidv4' }).required(),
+    shipmentId: Joi.string().required(),
     status: Joi.string().trim().lowercase().min(3).required(),
   });
 

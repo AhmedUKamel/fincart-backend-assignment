@@ -3,6 +3,10 @@ import { HmacConfigFactory, HmacValidationSchema } from './hmac.config';
 import { RedisConfigFactory, RedisValidationSchema } from './redis.config';
 import { ServerConfigFactory, ServerValidationSchema } from './server.config';
 import { ConfigModuleOptions as IConfigModuleOptions } from '@nestjs/config';
+import {
+  MongoDBConfigFactory,
+  MongoDBValidationSchema,
+} from './mongodb.config';
 
 export class ConfigModuleOptions implements IConfigModuleOptions<Joi.ValidationOptions> {
   public readonly isGlobal = true;
@@ -11,12 +15,14 @@ export class ConfigModuleOptions implements IConfigModuleOptions<Joi.ValidationO
     ServerConfigFactory,
     RedisConfigFactory,
     HmacConfigFactory,
+    MongoDBConfigFactory,
   ];
 
   public readonly validationSchema = [
     ServerValidationSchema,
     RedisValidationSchema,
     HmacValidationSchema,
+    MongoDBValidationSchema,
   ].reduce(
     (
       mergedSchema: Joi.AnySchema,

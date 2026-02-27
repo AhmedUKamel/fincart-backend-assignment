@@ -7,14 +7,18 @@
   "license": "UNLICENSED",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint \"src/**/*.ts\" --fix"
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "test01": "dotenvx run -- node dist/test.case.01.js",
+    "test02": "dotenvx run -- node dist/test.case.02.js"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.52.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
     "@nestjs/mongoose": "^11.0.4",
     "@nestjs/platform-fastify": "^11.1.14",
+    "axios": "^1.13.5",
     "bullmq": "^5.70.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",

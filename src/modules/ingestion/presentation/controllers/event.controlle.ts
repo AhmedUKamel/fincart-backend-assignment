@@ -1,16 +1,18 @@
-import { ApiResponse } from 'src/modules/common';
 import { EventRequest } from '../dto/requests/event.request';
 import { IngestionService } from '../../application';
+import { ApiResponse, HmacSignatureGuard } from 'src/modules/common';
 import {
   Body,
   Post,
   Logger,
   HttpCode,
+  UseGuards,
   Controller,
   HttpStatus,
 } from '@nestjs/common';
 
 @Controller({ path: 'events', version: '1' })
+@UseGuards(HmacSignatureGuard)
 export class EventController {
   private readonly logger = new Logger(EventController.name);
 

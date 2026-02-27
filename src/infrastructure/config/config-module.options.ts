@@ -1,16 +1,22 @@
 import * as Joi from 'joi';
+import { HmacConfigFactory, HmacValidationSchema } from './hmac.config';
+import { RedisConfigFactory, RedisValidationSchema } from './redis.config';
 import { ServerConfigFactory, ServerValidationSchema } from './server.config';
 import { ConfigModuleOptions as IConfigModuleOptions } from '@nestjs/config';
-import { RedisConfigFactory, RedisValidationSchema } from './redis.config';
 
 export class ConfigModuleOptions implements IConfigModuleOptions<Joi.ValidationOptions> {
   public readonly isGlobal = true;
 
-  public readonly load = [ServerConfigFactory, RedisConfigFactory];
+  public readonly load = [
+    ServerConfigFactory,
+    RedisConfigFactory,
+    HmacConfigFactory,
+  ];
 
   public readonly validationSchema = [
     ServerValidationSchema,
     RedisValidationSchema,
+    HmacValidationSchema,
   ].reduce(
     (
       mergedSchema: Joi.AnySchema,

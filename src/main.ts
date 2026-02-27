@@ -1,6 +1,8 @@
 import { AppModule } from './app/app.module';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import { VersioningType } from '@nestjs/common';
+import { AppValidationPipe } from './modules/common';
 import { ServerConfig, ServerConfigKey } from './infrastructure';
 import {
   FastifyAdapter,
@@ -12,6 +14,14 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+
+  app.setGlobalPrefix('api');
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1',
+  });
+
+  app.useGlobalPipes(new AppValidationPipe());
 
   const configService = app.get(ConfigService);
   const { host, port } =

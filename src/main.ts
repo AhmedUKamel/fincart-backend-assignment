@@ -2,8 +2,8 @@ import { AppModule } from './app/app.module';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { VersioningType } from '@nestjs/common';
-import { AppValidationPipe } from './modules/common';
 import { ServerConfig, ServerConfigKey } from './infrastructure';
+import { AppExceptionFilter, AppValidationPipe } from './modules/common';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -22,6 +22,7 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(new AppValidationPipe());
+  app.useGlobalFilters(new AppExceptionFilter());
 
   const configService = app.get(ConfigService);
   const { host, port } =

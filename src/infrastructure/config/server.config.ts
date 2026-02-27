@@ -26,4 +26,9 @@ function createServerConfig(): ServerConfig {
   };
 }
 
-export const ServerConfigFactory = registerAs('server', createServerConfig);
+export const ServerConfigKey = 'server';
+
+export const ServerConfigFactory = registerAs(
+  ServerConfigKey,
+  createServerConfig,
+);
